@@ -1,4 +1,4 @@
-import matrixTool as mt
+from matrixTool import MatrixTool
 
 # A = [
 #   [0, 0, 1, 0],
@@ -11,6 +11,8 @@ A = [[0, 1, 1, 1, 1, 1],
      [0, 1, 1, 2, 3, 2],
      [0, 2, 2, 1, 2, 1],
      [0, 4, 4, 4, 6, 4]]
+
+mt = MatrixTool()
 mt.echelon_form(A)
 
 for row in A:
