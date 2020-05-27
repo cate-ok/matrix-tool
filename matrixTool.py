@@ -13,6 +13,9 @@ def add_row_elements(a, row_to, row_from, k):
     for j in range(len(a[row_to])):
         a[row_to][j] += a[row_from][j] * k
 
+def print_matrix(a):
+    for row in a:
+        print(row)
 
 def echelon_form(a):
     rows_a = len(a)
@@ -23,9 +26,10 @@ def echelon_form(a):
     def find_leading_element(row_num, col_num):
         for j in range(col_num, cols_a):
             for i in range(row_num, rows_a):
-                if a[j][i] != 0:
-                    if i != 0:
-                        # leading_elem = a[j][i]
+                if a[i][j] != 0:
+                    if i == row_num:
+                        return j
+                    else:
                         swap_rows(a, row_num, i)
                         return j
         return None
@@ -34,17 +38,26 @@ def echelon_form(a):
     for i in range(rows_a):
         # 1
         leading_elem_j = find_leading_element(i, j)
+        print('1')
+        print_matrix(a)
 
         # 2
-        if not leading_elem_j:
-            # print('Leading element is 0')
-            continue
+        if leading_elem_j == None:
+            print('Leading element is 0')
+            return
 
         j = leading_elem_j
         leading_elem = a[i][j]
-        multiply_by_num(a, i, 1 / leading_elem)
+        multiply_by_num(a, i, 1 // leading_elem)
+
+        print('2')
+        print_matrix(a)
+
         if i == (rows_a - 1):
             print('Leading row is last row')
+            return
+        elif j == (cols_a - 1):
+            print('Last column')
             return
         else:
             j += 1
@@ -55,8 +68,11 @@ def echelon_form(a):
             el2 = a[l][j]
             if el1 == 0:
                 continue
-            k = (-1) * el2 / el1
+            k = (-1) * el2 // el1
             add_row_elements(a, l, i, k)
+
+        print('3')
+        print_matrix(a)
 
         # 4
         if i == (rows_a - 1) and j == (cols_a - 1):
