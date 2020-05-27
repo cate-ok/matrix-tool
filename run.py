@@ -1,5 +1,7 @@
 from matrixTool import MatrixTool
 
+print('Test changes')
+
 # A = [
 #   [0, 0, 1, 0],
 #   [0, 2, 0, 2],
