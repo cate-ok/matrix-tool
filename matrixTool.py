@@ -5,6 +5,79 @@ class MatrixTool:
     def __init__(self):
         pass
 
+    def add(self, a, b):
+        len_a = len(a)
+        len_b = len(b)
+
+        if len_a != len_b:
+            raise ValueError('matrices should have the same size')
+
+        c = []
+        if len_a == 0:
+            return c
+
+        len_row_a = len(a[0])
+        len_row_b = len(b[0])
+        if len_row_a != len_row_b:
+            raise ValueError('matrices should have the same size')
+
+        for i in range(len_a):
+            c.append([])
+            for j in range(len_row_a):
+                c[i].append(a[i][j] + b[i][j])
+        return c
+
+    def multiply(self, a, b):
+        """
+        :param a: matrix A (m x p)
+        :param b: matrix B (p x n)
+        :return: A * B
+        """
+        c = []
+        rows_a = len(a)
+        rows_b = len(b)
+        if rows_a == 0 or rows_b == 0:
+            return c
+        cols_a = len(a[0])
+        cols_b = len(b[0])
+        if cols_a != rows_b:
+            raise ValueError("matrices don't match")
+
+        for i in range(rows_a):
+            c.append([])
+            for j in range(cols_b):
+                res = 0
+                for k in range(cols_a):
+                    res += a[i][k] * b[k][j]
+                c[i].append(res)
+        return c
+
+    def transpose(self, a):
+        c = []
+        rows_a = len(a)
+        cols_a = len(a[0])
+
+        for i in range(cols_a):
+            res = []
+            for j in range(rows_a):
+                res.append(a[j][i])
+            c.append(res)
+        return c
+
+    def trace(self, a):
+        result = 0
+        rows_a = len(a)
+        if rows_a == 0:
+            return result
+        cols_a = len(a[0])
+        if cols_a != rows_a:
+            raise ValueError("matrix must be square")
+        k = 0
+        for i in range(rows_a):
+            result += a[i][k]
+            k += 1
+        return result
+
     def swap_rows(self, a, i1, i2):
         t_row = a[i1]
         a[i1] = a[i2]
